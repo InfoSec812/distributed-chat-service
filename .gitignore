@@ -1,0 +1,5 @@
+.vertx
+.vertx/**
+nbactions.xml
+target
+target/**

@@ -1,0 +1,30 @@
+Configuration:
+  name: "distributed-chat-service"
+  status: "debug"
+  Appenders:
+    Console:
+      name: "CONSOLE"
+      target: SYSTEM_OUT
+      JSONLayout:
+        complete: true
+        compact: true
+        eventEol: true
+        properties: true
+        locationInfo: true
+  Loggers:
+    Logger:
+      name: "io.netty"
+      level: FATAL
+      additivity: false
+      AppenderRef:
+        ref: "CONSOLE"
+    Logger:
+      name: "org.jooq"
+      level: FATAL
+      additivity: false
+      AppenderRef:
+        ref: "CONSOLE"
+    Root:
+      level: DEBUG
+      AppenderRef:
+        ref: "CONSOLE"
