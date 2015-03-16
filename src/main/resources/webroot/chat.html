@@ -37,7 +37,9 @@
             
             function send(event) {
                 if (event.keyCode==13 || event.which == 13) {
-                    eb.publish("chat.message.in", $('#input').valueOf());
+                    var message = $('#input').val();
+                    console.log($('#input'));
+                    eb.publish("chat.message.in", message);
                     $('#input').empty();
                 }
             }

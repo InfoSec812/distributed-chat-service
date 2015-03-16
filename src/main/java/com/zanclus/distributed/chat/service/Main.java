@@ -73,8 +73,7 @@ public class Main extends AbstractVerticle {
         
         log.debug("Adding eventbus route");
         SockJSHandler ebHandler = SockJSHandler.create(vertx).bridge(opts);
-        router.route("/eventbus/").handler(ebHandler);
-        router.route("/eventbus/info").handler(ebHandler);
+        router.route("/eventbus/*").handler(ebHandler);
         
         log.debug("Starting http server.");
         vertx.createHttpServer().requestHandler(router::accept).listen(8000);

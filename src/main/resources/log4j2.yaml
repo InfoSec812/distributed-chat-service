@@ -5,12 +5,12 @@ Configuration:
     Console:
       name: "CONSOLE"
       target: SYSTEM_OUT
-      JSONLayout:
-        complete: true
-        compact: true
-        eventEol: true
-        properties: true
-        locationInfo: true
+      PatternLayout:
+#        complete: false
+#        compact: true
+#        eventEol: true
+#        properties: true
+#        locationInfo: true
   Loggers:
     Logger:
       name: "io.netty"
