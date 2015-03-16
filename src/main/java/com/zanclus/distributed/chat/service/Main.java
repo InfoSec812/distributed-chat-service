@@ -27,9 +27,13 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.impl.LoggerFactory;
 import io.vertx.ext.apex.Router;
+import io.vertx.ext.apex.handler.StaticHandler;
 import io.vertx.ext.apex.handler.sockjs.BridgeOptions;
 import io.vertx.ext.apex.handler.sockjs.PermittedOptions;
 import io.vertx.ext.apex.handler.sockjs.SockJSHandler;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
 
 /**
  * A simple implementation of the Vert.x SockJS Event Bus Bridge for a chat site.
@@ -53,17 +57,8 @@ public class Main extends AbstractVerticle {
         log.debug("Subscribing to 'chat.message.in'");
         eb.consumer("chat.message.in").handler(message -> {
             log.debug("Message recieved: "+message.body());
-            eb.publish("chat.message.out", message.body());
-        });
-        
-        log.debug("Creating route for 'chat.html'");
-        router.route(HttpMethod.GET, "/chat.html").handler(req -> {
-            req.response().sendFile("webroot/chat.html");
-        });
-        
-        log.debug("Creating route for 'vertxbus.js'");
-        router.route(HttpMethod.GET, "/vertxbus.js").handler(req -> {
-            req.response().sendFile("webroot/vertxbus.js");
+            String timestamp = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.MEDIUM).format(Date.from(Instant.now()));
+            eb.publish("chat.message.out", timestamp+": "+message.body());
         });
         
         log.debug("Creating JS/EventBus bridge options");
@@ -74,6 +69,8 @@ public class Main extends AbstractVerticle {
         log.debug("Adding eventbus route");
         SockJSHandler ebHandler = SockJSHandler.create(vertx).bridge(opts);
         router.route("/eventbus/*").handler(ebHandler);
+        
+        router.route().handler(StaticHandler.create("webroot/").setIndexPage("chat.html"));
         
         log.debug("Starting http server.");
         vertx.createHttpServer().requestHandler(router::accept).listen(8000);
