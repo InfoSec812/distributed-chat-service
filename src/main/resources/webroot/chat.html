@@ -31,7 +31,7 @@
             var eb = new vertx.EventBus("/eventbus/");
             eb.onopen = function() {
                 eb.registerHandler("chat.message.out", function(msg) {
-                    $('#chat').append(msg);
+                    $('#chat').append(msg+"\n");
                 });
             };
             
@@ -40,11 +40,11 @@
                     var message = $('#input').val();
                     console.log($('#input'));
                     eb.publish("chat.message.in", message);
-                    $('#input').empty();
+                    $('#input').val("");
                 }
             }
         </script>
-        <div id="chat" style="font-family: monospace; white-space: pre; width: 400px; height: 600px;"></div>
+        <div id="chat" style="font-family: monospace; white-space: pre; width: 400px; height: 600px; border-width: 4px; border-color: #666 transparent #ccc transparent;"></div>
         <input id="input" type="text" onkeydown="send(event)" style="width: 400px;">
     </body>
 </html>

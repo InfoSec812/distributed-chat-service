@@ -53,7 +53,7 @@ public class Main extends AbstractVerticle {
         log.debug("Subscribing to 'chat.message.in'");
         eb.consumer("chat.message.in").handler(message -> {
             log.debug("Message recieved: "+message.body());
-            eb.publish("chat.message.out", message);
+            eb.publish("chat.message.out", message.body());
         });
         
         log.debug("Creating route for 'chat.html'");
