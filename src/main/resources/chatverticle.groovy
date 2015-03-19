@@ -37,16 +37,8 @@ eb.consumer("chat.to.server").handler({ message ->
 
 // Configure the {@link EventBus} bridge allowing only the specified addresses in/out.
 def opts = [
-  inboundPermitteds:[
-    [
-      address:"chat.to.server"
-    ]
-  ],
-  outboundPermitteds:[
-    [
-      address:"chat.to.client"
-    ]
-  ]
+  inboundPermitteds:[[address:"chat.to.server"]],
+  outboundPermitteds:[[address:"chat.to.client"]]
 ]
 
 def ebHandler = SockJSHandler.create(vertx).bridge(opts)
