@@ -19,22 +19,27 @@
   -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Distributed Chat Service</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="//cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
         <script src="vertxbus.js"></script>
         <style>
-            .chatarea {
+            .inset {
                 box-shadow:inset 0 0 4px #000000;
                 -moz-box-shadow:inset 0 0 4px #000000;
                 -webkit-box-shadow:inset 0 0 4px #000000;
-                font-family: monospace;
-                white-space: pre;
                 width: 400px;
-                height: 600px;
                 border-width: 4px;
+                padding: 5px;
+            }
+            input.inset {
+                height: 40px;
+            }
+            div.inset {
+                height: 500px;
+                white-space: pre-wrap
             }
         </style>
     </head>
@@ -42,7 +47,7 @@
         <script>
             var eb = new vertx.EventBus("/eventbus/");
             eb.onopen = function() {
-                eb.registerHandler("chat.message.out", function(msg) {
+                eb.registerHandler("chat.to.client", function(msg) {
                     $('#chat').append(msg+"\n");
                 });
             };
@@ -50,13 +55,15 @@
             function send(event) {
                 if (event.keyCode==13 || event.which == 13) {
                     var message = $('#input').val();
-                    console.log($('#input'));
-                    eb.publish("chat.message.in", message);
-                    $('#input').val("");
+                    if (message.length>0) {
+                        console.log($('#input'));
+                        eb.publish("chat.to.server", message);
+                        $('#input').val("");
+                    }
                 }
             }
         </script>
-        <div id="chat" class="chatarea"></div>
-        <input id="input" type="text" onkeydown="send(event)" style="width: 400px; height: 60px;">
+        <div id="chat" class="inset"></div>
+        <input id="input" type="text" onkeydown="send(event)" class="inset">
     </body>
 </html>
