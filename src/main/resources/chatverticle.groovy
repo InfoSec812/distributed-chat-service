@@ -17,9 +17,11 @@
  * limitations under the License.
  * #L%
  */
+import static java.text.DateFormat.*
 import io.vertx.groovy.ext.apex.Router
 import io.vertx.groovy.ext.apex.handler.sockjs.SockJSHandler
 import io.vertx.groovy.ext.apex.handler.StaticHandler
+import java.text.DateFormat
 
 // Create an apex {@link Router}
 def router = Router.router(vertx)
@@ -31,7 +33,7 @@ def eb = vertx.eventBus()
 eb.consumer("chat.to.server").handler({ message ->
   // When a message is recieved, prepend a timestamp and send the message back to all clients.
   def now = java.util.Date.from(java.time.Instant.now())
-  def timestamp = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.SHORT, java.text.DateFormat.MEDIUM).format(now)
+  def timestamp = getDateTimeInstance(SHORT, MEDIUM).format(now)
   eb.publish("chat.to.client", timestamp+': '+message.body())
 })
 
