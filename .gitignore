@@ -3,3 +3,12 @@
 nbactions.xml
 target
 target/**
+.idea
+.idea/**
+.settings
+.settings/**
+.vertx
+.vertx/**
+.classpath
+.project
+distributed-chat-service.iml

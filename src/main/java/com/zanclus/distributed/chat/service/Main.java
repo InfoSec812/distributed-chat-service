@@ -24,6 +24,7 @@ import static java.time.Instant.now;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.ext.apex.Router;
 import io.vertx.ext.apex.handler.StaticHandler;
@@ -39,9 +40,12 @@ import java.util.Date;
 public class Main extends AbstractVerticle {
 
     public static void main(String[] args) {
-        Vertx.vertx().deployVerticle(new Main());
+//        Vertx.clusteredVertx(new VertxOptions().setClustered(true), startHandler -> {
+//            Vertx.vertx().deployVerticle(new Main());
+//        });
+//        Vertx.vertx().deployVerticle(new Main());
 //        Vertx.vertx().deployVerticle("chatverticle.groovy");
-//        Vertx.vertx().deployVerticle("chat.js");
+        Vertx.vertx().deployVerticle("chat.js");
     }
 
     @Override
