@@ -40,12 +40,12 @@ import java.util.Date;
 public class Main extends AbstractVerticle {
 
     public static void main(String[] args) {
-//        Vertx.clusteredVertx(new VertxOptions().setClustered(true), startHandler -> {
-//            Vertx.vertx().deployVerticle(new Main());
-//        });
+        Vertx.clusteredVertx(new VertxOptions().setClustered(true), startHandler -> {
+            Vertx.vertx().deployVerticle(new Main());
+        });
 //        Vertx.vertx().deployVerticle(new Main());
 //        Vertx.vertx().deployVerticle("chatverticle.groovy");
-        Vertx.vertx().deployVerticle("chat.js");
+//        Vertx.vertx().deployVerticle("chat.js");
     }
 
     @Override
