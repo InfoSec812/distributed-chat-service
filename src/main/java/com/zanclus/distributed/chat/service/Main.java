@@ -43,9 +43,24 @@ public class Main extends AbstractVerticle {
         Vertx.clusteredVertx(new VertxOptions().setClustered(true), startHandler -> {
             Vertx.vertx().deployVerticle(new Main());
         });
-//        Vertx.vertx().deployVerticle(new Main());
-//        Vertx.vertx().deployVerticle("chatverticle.groovy");
-//        Vertx.vertx().deployVerticle("chat.js");
+    }
+
+    public static class RunJava {
+        public static void main(String[] args) {
+            Vertx.vertx().deployVerticle(new Main());
+        }
+    }
+
+    public static class RunJS {
+        public static void main(String[] args) {
+            Vertx.vertx().deployVerticle("chat.js");
+        }
+    }
+
+    public static class RunGroovy {
+        public static void main(String[] args) {
+            Vertx.vertx().deployVerticle("chatverticle.groovy");
+        }
     }
 
     @Override

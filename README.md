@@ -52,6 +52,12 @@ cd distributed-chat-service
 mvn clean compile
 mvn exec:java -Dexec.mainClass=com.zanclus.distributed.chat.service.Main
 ```
+Alternatively, to run the Groovy or JavaScript versions of the service:
+
+```
+mvn exec:java -Dexec.mainClass=com.zanclus.distributed.chat.service.Main.RunGroovy
+mvn exec:java -Dexec.mainClass=com.zanclus.distributed.chat.service.Main.RunJS
+```
 
 The application will be started and listen on all local interfaces on port 8000.
 
