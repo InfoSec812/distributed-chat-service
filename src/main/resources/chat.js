@@ -31,13 +31,13 @@ var eb = vertx.eventBus();
 // Register a listener on the {@link EventBus} to recieve messages from the client.
 eb.consumer("chat.to.server").handler(function (message) {
     // When a message is received, prepend a timestamp and send the message back to all clients.
-    console.log(message.body)
+    console.log(message.body())
     var now = Java.type("java.util.Date")
             .from(Java.type("java.time.Instant").now());
     var timestamp = Java.type("java.text.DateFormat")
             .getDateTimeInstance(Java.type("java.text.DateFormat").SHORT,
                     Java.type("java.text.DateFormat").MEDIUM).format(now);
-    eb.publish("chat.to.client", timestamp + ": " + message.body);
+    eb.publish("chat.to.client", timestamp + ": " + message.body());
 });
 
 // Configure the {@link EventBus} bridge allowing only the specified addresses in/out.

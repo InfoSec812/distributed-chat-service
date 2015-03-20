@@ -7,8 +7,6 @@ target/**
 .idea/**
 .settings
 .settings/**
-.vertx
-.vertx/**
 .classpath
 .project
 distributed-chat-service.iml

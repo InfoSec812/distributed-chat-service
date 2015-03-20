@@ -39,7 +39,8 @@
             }
             div.inset {
                 height: 500px;
-                white-space: pre-wrap
+                white-space: pre-wrap;
+                overflow: auto;
             }
         </style>
     </head>
@@ -49,6 +50,7 @@
             eb.onopen = function() {
                 eb.registerHandler("chat.to.client", function(msg) {
                     $('#chat').append(msg+"\n");
+                    $("#chat").scrollTop($("#chat")[0].scrollHeight);
                 });
             };
             
