@@ -12,3 +12,7 @@ target/**
 .classpath
 .project
 distributed-chat-service.iml
+src/main/resources/vertx-apex-js
+src/main/resources/vertx-js
+src/main/resources/vertx-apex-js/**
+src/main/resources/vertx-js/**
