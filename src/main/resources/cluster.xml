@@ -9,6 +9,9 @@
         <property name="hazelcast.wait.seconds.before.join">0</property>
         <property name="hazelcast.logging.type">jdk</property>
         <property name="hazelcast.prefer.ipv4.stack">true</property>
+        <property name="hazelcast.socket.bind.any">false</property>
+        <property name="hazelcast.socket.server.bind.any">false</property>
+        <property name="hazelcast.socket.client.bind.any">false</property>
     </properties>
 
     <group>
@@ -40,7 +43,7 @@
                 <region>us-east-1</region>
             </aws>
         </join>
-        <interfaces enabled="false">
+        <interfaces enabled="true">
             <interface>192.168.1.*</interface>
         </interfaces>
         <ssl enabled="false"/>
